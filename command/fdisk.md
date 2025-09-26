@@ -1,5 +1,7 @@
 # fdisk Command Notes
 
+---
+
 ## Format USB
 
 1. **List disks** to identify the target device:
