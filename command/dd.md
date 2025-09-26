@@ -1,5 +1,7 @@
 # dd Command Notes
 
+---
+
 ## Create a Bootable USB
 
 Write an ISO to a USB drive:
