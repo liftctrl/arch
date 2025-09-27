@@ -1,41 +1,49 @@
 # fdisk Command Notes
 
+This document collects useful `fdisk` commands for daily work.
+
 ---
 
-## Format USB
+## 1. Format USB
 
-1. **List disks** to identify the target device:
+### 1.1 List Disks
+
+Identify the target device:
 
 ```bash
 sudo fdisk -l
 ```
 
-2. **Start fdisk** on the target device (replace /dev/sdX):
+### 1.2 Start fdisk
+
+Replace `/dev/sdX` with your target device:
 
 ```bash
 sudo fdisk /dev/sdX
 ```
 
-3. **Inside fdisk**, use these commands:
+### 1.3 fdisk Commands
+
+Inside `fdisk`, use:
 
 - `o` → create a new empty DOS partition table (erases all data)
-- `n` → create a new partition (choose primary, defaults are usually fine)
-- `t` → set partition type (optional, e.g., `b` for W95 FAT32)
+- `n` → create a new partition (primary, defaults usually fine)
+- `t` → set partition type (optional, e.g., b for W95 FAT32)
 - `w` → write changes and exit
 
-4. **Format the partition** (usually /dev/sdX1) with a filesystem:
+### 1.4 Format Partition
+
+Usually /dev/sdX1:
 
 ```bash
 sudo mkfs.vfat -F 32 /dev/sdX1  # FAT32
-# or
 sudo mkfs.ext4 /dev/sdX1        # ext4
-# or
 sudo mkfs.ntfs /dev/sdX1        # NTFS
 ```
 
-> ⚠️ **Warning**: Double-check the device name `/dev/sdX`. Formatting will erase all data on the device.
+> ⚠️ Double-check `/dev/sdX`. Formatting erases all data.
 
-Check the new partition table:
+### 1.5 Verify
 
 ```bash
 sudo fdisk -l /dev/sdX
