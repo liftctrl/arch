@@ -1,35 +1,45 @@
 # dd Command Notes
 
+This document collects useful `dd` commands for daily work.
+
 ---
 
-## Create a Bootable USB
+## 1. Create Bootable USB
 
-Write an ISO to a USB drive:
+Write an ISO to a USB device:
 
 ```bash
-sudo dd if=archlinux-2025.xx.xx-x86_64.iso of=/dev/sdX bs=4M status=progress oflag=sync
+sudo dd if=archlinux-2025.iso of=/dev/sdX bs=4M status=progress oflag=sync
 ```
 
-- `if` → input file (ISO image)
-- `of` → target USB device (e.g., /dev/sdb)
-- `bs=4M` → block size for faster writing
-- `status=progress` → show progress during writing
-- `oflag=sync` → ensure data is fully written
+### 1.1 Notes
 
-> ⚠️ **Warning**: Double-check `of=` points to the correct device. Writing to the wrong drive will erase it.
+- if → input ISO file
+- of → target USB device (e.g., /dev/sdb)
+- bs=4M → block size
+- status=progress → show progress
+- oflag=sync → ensure all data is written
 
-Check partitions:
+> ⚠️ Double-check of=. Wrong device = data loss.
+
+### 1.2 Verify USB
 
 ```bash
 sudo fdisk -l /dev/sdX
 ```
 
-Optionally mount and verify files:
+Optional:
 
 ```bash
 sudo mount /dev/sdX1 /mnt
 ls /mnt
 sudo umount /mnt
+```
+
+### 1.3 Flush Writes
+
+```bash
+sync
 ```
 
 ---
